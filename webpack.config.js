@@ -43,6 +43,7 @@ module.exports = {
   plugins: [HtmlWebpackPluginConfig],
 
   devServer: {
+    historyApiFallback: true,
     proxy: {
       "/api": {
         target: config.apiHost,

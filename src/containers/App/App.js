@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import request from '../../utils/request'
+import MyRouter from '../MyRouter'
 import './App.scss'
 
 export default class App extends React.Component {
@@ -44,7 +45,7 @@ export default class App extends React.Component {
         {loading && <div className="loading">
           <div className="spinner"></div>
         </div>}
-        {false && <p className="bla">{beers && JSON.stringify(beers)}</p>}
+        {beers && <MyRouter />}
       </div>);
   }
 }
