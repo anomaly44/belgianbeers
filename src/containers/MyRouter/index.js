@@ -2,8 +2,10 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Link
 } from 'react-router-dom'
+
+// # Components
+import BeersList from '../BeersList'
 
 const Home = () => (
   <div>
@@ -18,10 +20,12 @@ const Beers = () => (
   </div>
 );
 
-export default () => (
+export default (props) => (
   <Router>
     <div>
-      <Route exact path="/" component={Home}/>
+      <Route exact path="/" render={() => (
+        <BeersList beers={props.beers} />
+      )}/>
       <Route exact path="/beers/:id" component={Beers}/>
     </div>
   </Router>

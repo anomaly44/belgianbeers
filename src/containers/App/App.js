@@ -45,7 +45,7 @@ export default class App extends React.Component {
         {loading && <div className="loading">
           <div className="spinner"></div>
         </div>}
-        {beers && <MyRouter />}
+        {beers && <MyRouter beers={beers} />}
       </div>);
   }
 }
