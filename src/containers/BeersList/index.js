@@ -1,14 +1,24 @@
 import React from 'react'
+import {
+  Card, CardImg, CardText, CardBlock,
+  CardTitle, CardSubtitle, Button
+} from 'reactstrap'
 
 const renderBeer = (data) => (
-  <li key={data.id}>{data.name}</li>
+  <Card key={data.id} className="col-xs-6 col-md-2">
+    <CardImg top width="100%" src={data.thumb_image_url} alt={data.name}/>
+    <CardBlock>
+      <CardTitle>{data.name}</CardTitle>
+    </CardBlock>
+  </Card>
 );
 
-export default ({beers}) => {
-  return (<div>
-    <ul>
+export default ({ beers }) => {
+  return (<div className="container">
+    <h1>Belgian Beers</h1>
+    <div className="row">
       {beers.map(renderBeer)}
-    </ul>
+    </div>
   </div>)
 
 }
