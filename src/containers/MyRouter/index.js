@@ -2,10 +2,13 @@ import React from 'react'
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
 } from 'react-router-dom'
 
 // # Components
 import BeersList from '../BeersList'
+import NoMatch from '../NoMatch'
+import BeerDetail from '../BeerDetail'
 
 const Home = () => (
   <div>
@@ -23,10 +26,15 @@ const Beers = () => (
 export default (props) => (
   <Router>
     <div>
-      <Route exact path="/" render={() => (
-        <BeersList beers={props.beers} />
-      )}/>
-      <Route exact path="/beers/:id" component={Beers}/>
+      <Switch>
+        <Route exact path="/" render={() => (
+          <BeersList beers={props.beers}/>
+        )}/>
+        <Route exact path="/beers/:id" render={({match}) => (
+          <BeerDetail beers={props.beers} match={match} />
+        )}/>
+        <Route component={NoMatch}/>
+      </Switch>
     </div>
   </Router>
 );
