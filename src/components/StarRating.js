@@ -27,7 +27,7 @@ export default class StarRating extends Component {
     const selectStarStyle = (i) => ({
       float: 'left',
       cursor: editing ? 'pointer' : 'default',
-      color: value >= i ? '#ffb400' : '#333'
+      color: value >= i ? '#ffb400' : '#6D6D6D'
     });
 
     const nodes = [];

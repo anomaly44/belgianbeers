@@ -8,7 +8,10 @@ import {
   FormGroup
 } from 'reactstrap'
 import { Link } from 'react-router-dom'
-import StarRating from '../StarRating'
+
+// # Components
+import StarRating from '../components/StarRating'
+import H1 from '../components/H1'
 
 const styles = {
   container: {
@@ -69,7 +72,7 @@ export default class BeersList extends Component {
 
     return (
       <div className="container" style={styles.container}>
-        <h1>Belgian Beers</h1>
+        <H1>Belgian Beers</H1>
         <FormGroup>
           <Label for="selectFilter">Show:</Label>
           <Input

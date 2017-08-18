@@ -6,10 +6,10 @@ import {
   Switch,
 } from 'react-router-dom'
 
-// # Components
-import BeersList from '../BeersList'
-import NoMatch from '../NoMatch'
-import BeerDetail from '../BeerDetail'
+// # Pages
+import BeersList from '../pages/BeersList'
+import NoMatch from '../pages/NoMatch'
+import BeerDetail from '../pages/BeerDetail'
 
 export default function MyRouter (props) {
   return (

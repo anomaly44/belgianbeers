@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardTitle, CardText } from 'reactstrap'
-import StarRating from '../StarRating'
-import { getBeer } from '../../utils/beerDataUtils'
+import { getBeer } from '../utils/beerDataUtils'
+
+// # Components
+import StarRating from '../components/StarRating'
+import H1 from '../components/H1'
 
 const styles = {
   container: {
@@ -17,9 +20,6 @@ const styles = {
   beerImage: {
     marginBottom: 30
   },
-  ratingContainer: {
-    textAlign: 'center'
-  }
 };
 
 export default class BeerDetail extends Component {
@@ -44,9 +44,9 @@ export default class BeerDetail extends Component {
     const brewery = beer.brewery;
     return (
       <div className="container" style={styles.container}>
-        <h1 style={styles.beerNameHeading}>
+        <H1>
           {beer.name}
-        </h1>
+        </H1>
         <div className="row">
           <div className="col-xs-12 col-md-6" style={{ textAlign: 'center' }}>
             <img

@@ -2,9 +2,9 @@
  * Created by rob on 8/15/17.
  */
 import React from 'react';
-import request from '../../utils/request'
-import MyRouter from '../MyRouter'
-import { getBeerIndex } from '../../utils/beerDataUtils'
+import request from '../utils/request'
+import MyRouter from '../components/MyRouter'
+import { getBeerIndex } from '../utils/beerDataUtils'
 
 import './App.scss'
 
