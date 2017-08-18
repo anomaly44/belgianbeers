@@ -2,16 +2,23 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Card, CardTitle, CardText } from 'reactstrap'
 import StarRating from '../StarRating'
+import {getBeer} from '../../utils/beerDataUtils'
 
 export default class BeerDetail extends Component {
 
+  getBeerId = () => {
+    // grab id param and cast to int
+    return this.props.match && this.props.match.params.id * 1;
+  };
+
   getSelectedBeer = () => {
     const { beers } = this.props;
+    return getBeer(beers, this.getBeerId());
+  };
 
-    // grab id param and cast to int
-    const id = this.props.match && this.props.match.params.id * 1;
-
-    return beers[beers.findIndex(beer => beer.id === id)];
+  changeBeerRating = (rating) => {
+    const {changeRating} = this.props;
+    changeRating(this.getBeerId(), rating);
   };
 
   render() {
@@ -40,7 +47,12 @@ export default class BeerDetail extends Component {
               <h3 style={{ marginTop: 20, marginBottom: 20 }}>
                 {beer.rating ? 'Change the rating of this beer:' : 'Rate this beer'}
               </h3>
-              <StarRating value={beer.rating} editing large />
+              <StarRating
+                value={beer.rating}
+                onRatingChange={this.changeBeerRating}
+                editing
+                large
+              />
             </div>
           </div>}
         </div>
@@ -50,5 +62,6 @@ export default class BeerDetail extends Component {
 }
 
 BeerDetail.propTypes = {
-  beers: PropTypes.array.isRequired
+  beers: PropTypes.array.isRequired,
+  changeRating: PropTypes.func.isRequired
 };

@@ -4,6 +4,8 @@
 import React from 'react';
 import request from '../../utils/request'
 import MyRouter from '../MyRouter'
+import { getBeerIndex } from '../../utils/beerDataUtils'
+
 import './App.scss'
 
 export default class App extends React.Component {
@@ -17,6 +19,17 @@ export default class App extends React.Component {
     };
   }
 
+  changeRating = (id, rating) => {
+    const { beers } = this.state;
+    if (!this.state.beers) {
+      return undefined
+    }
+    const beerIndex = getBeerIndex(beers, id);
+    const newBeers = beers.slice();
+    newBeers[beerIndex].rating = rating;
+    this.setState({ beers: newBeers });
+
+  };
 
   async componentDidMount() {
     try {
@@ -45,7 +58,7 @@ export default class App extends React.Component {
         {loading && <div className="loading">
           <div className="spinner"></div>
         </div>}
-        {beers && <MyRouter beers={beers} />}
+        {beers && <MyRouter beers={beers} changeRating={this.changeRating} />}
       </div>);
   }
 }

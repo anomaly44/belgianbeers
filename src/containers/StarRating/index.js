@@ -10,17 +10,19 @@ const radioStyle = {
 
 export default class StarRating extends Component {
 
-  onChange = (value) => {
-    const { editing } = this.props;
+  handleStarClick = (index) => {
+    const { editing, onRatingChange } = this.props;
 
     if (!editing) {
       return;
     }
+    console.log(index);
+    onRatingChange(index);
 
-  }
+  };
 
   renderStars() {
-    const { value, editing } = this.props;
+    const { value, editing, large } = this.props;
 
     const selectStarStyle = (i) => ({
       float: 'left',
@@ -44,7 +46,8 @@ export default class StarRating extends Component {
         <label
           key={`label_${i}`}
           style={selectStarStyle(i)}
-        ><i style={{fontStyle: 'normal', fontSize: '1.5em'}}>&#9733;</i></label>
+          onClick={() => this.handleStarClick(i)}
+        ><i style={{fontStyle: 'normal', fontSize: large ? '3em' : '1.5em'}}>&#9733;</i></label>
       );
       nodes.push(starInput);
       nodes.push(starLabel)
@@ -65,4 +68,5 @@ export default class StarRating extends Component {
 StarRating.propTypes = {
   value: PropTypes.number,
   editing: PropTypes.bool,
-}
+  onRatingChange: PropTypes.func
+};

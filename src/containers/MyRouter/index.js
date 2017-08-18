@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {
   BrowserRouter as Router,
   Route,
@@ -10,31 +11,25 @@ import BeersList from '../BeersList'
 import NoMatch from '../NoMatch'
 import BeerDetail from '../BeerDetail'
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-    <Link to="/beers/3">to beers</Link>
-  </div>
-);
+export default function MyRouter (props) {
+  return (
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" render={() => (
+            <BeersList beers={props.beers}/>
+          )}/>
+          <Route exact path="/beers/:id" render={({match}) => (
+            <BeerDetail beers={props.beers} changeRating={props.changeRating} match={match} />
+          )}/>
+          <Route component={NoMatch}/>
+        </Switch>
+      </div>
+    </Router>
+  );
+}
 
-const Beers = () => (
-  <div>
-    <h2>Beers</h2>
-  </div>
-);
-
-export default (props) => (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" render={() => (
-          <BeersList beers={props.beers}/>
-        )}/>
-        <Route exact path="/beers/:id" render={({match}) => (
-          <BeerDetail beers={props.beers} match={match} />
-        )}/>
-        <Route component={NoMatch}/>
-      </Switch>
-    </div>
-  </Router>
-);
+MyRouter.propTypes = {
+  beers: PropTypes.array.isRequired,
+  changeRating: PropTypes.func.isRequired,
+};
