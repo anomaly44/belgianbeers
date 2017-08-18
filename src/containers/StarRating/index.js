@@ -16,7 +16,7 @@ export default class StarRating extends Component {
     if (!editing) {
       return;
     }
-    console.log(index);
+
     onRatingChange(index);
 
   };
@@ -40,6 +40,7 @@ export default class StarRating extends Component {
           value={i}
           checked={value === i}
           readOnly={!editing}
+          onChange={() => null}
         />
       );
       const starLabel = (

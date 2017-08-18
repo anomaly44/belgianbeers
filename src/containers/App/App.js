@@ -19,15 +19,36 @@ export default class App extends React.Component {
     };
   }
 
-  changeRating = (id, rating) => {
+  async changeRating(id, rating) {
     const { beers } = this.state;
-    if (!this.state.beers) {
+    if (!beers) {
       return undefined
     }
-    const beerIndex = getBeerIndex(beers, id);
+    const oldBeers = beers.slice();
     const newBeers = beers.slice();
+
+    // Update our local beer data optimistically
+    const beerIndex = getBeerIndex(beers, id);
     newBeers[beerIndex].rating = rating;
     this.setState({ beers: newBeers });
+
+    // handle update on server
+    try {
+      await request(`/api/beers/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ rating })
+      })
+    } catch (err) {
+
+      // Set error and rollback to our old beer array
+      this.setState({
+        error: 'Failed updating beer rating',
+        beers: oldBeers
+      })
+    }
 
   };
 
@@ -58,7 +79,7 @@ export default class App extends React.Component {
         {loading && <div className="loading">
           <div className="spinner"></div>
         </div>}
-        {beers && <MyRouter beers={beers} changeRating={this.changeRating} />}
+        {beers && <MyRouter beers={beers} changeRating={this.changeRating.bind(this)}/>}
       </div>);
   }
 }
