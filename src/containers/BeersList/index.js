@@ -1,33 +1,48 @@
 import React from 'react'
-import {
-  Card, CardImg, CardText, CardBlock,
-  CardTitle, CardSubtitle, Button
-} from 'reactstrap'
+import { ListGroup, ListGroupItem } from 'reactstrap'
 import { Link } from 'react-router-dom'
 import StarRating from '../StarRating'
 
-const renderBeer = (data) => (
-  <Card key={data.id} className="col-xs-6 col-md-2">
-    <CardImg top width="100%" src={data.thumb_image_url} alt={data.name}/>
-    <CardBlock>
-      <CardTitle>{data.name}</CardTitle>
-      <CardSubtitle><StarRating editing={false} value={data.rating}/></CardSubtitle>
-      <Button
-        tag={Link}
-        to={`/beers/${data.id}`}
-      >
-        Details
-      </Button>
-    </CardBlock>
-  </Card>
+const styles = {
+  container: {
+    marginTop: 30,
+    marginBottom: 30,
+  },
+  listItem: {
+    paddingLeft: 35,
+    paddingRight: 35,
+  }
+};
+
+const renderBeer = (beer) => (
+  <ListGroupItem
+    key={beer.id}
+    tag={Link}
+    to={`/beers/${beer.id}`}
+    style={styles.listItem}
+  >
+    <div className="row">
+      <div className="col-xs-3">
+        <img src={beer.thumb_image_url} alt={beer.name} height={100} width={100}/>
+      </div>
+      <div className="col-xs-9" style={{marginLeft: 30}}>
+        <h3>{beer.name}</h3>
+        <StarRating editing={false} value={beer.rating}/>
+      </div>
+    </div>
+  </ListGroupItem>
 );
 
 export default ({ beers }) => {
-  return (<div className="container">
-    <h1>Belgian Beers</h1>
-    <div className="row">
-      {beers.map(renderBeer)}
-    </div>
-  </div>)
+  return (
+    <div className="container" style={styles.container}>
+      <h1>Belgian Beers</h1>
+      <div className="row">
+        <ListGroup className="col-xs-12" >
+          {beers.map(renderBeer)}
+        </ListGroup>
+      </div>
+    </div>)
 
 }
+
