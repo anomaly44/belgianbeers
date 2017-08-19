@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
-  ListGroup,
-  ListGroupItem,
   Input,
   Label,
   FormGroup
@@ -12,6 +10,7 @@ import { Link } from 'react-router-dom'
 // # Components
 import StarRating from '../components/StarRating'
 import H1 from '../components/H1'
+import H2 from '../components/H2'
 
 const styles = {
   container: {
@@ -19,30 +18,35 @@ const styles = {
     marginBottom: 30,
   },
   listItem: {
-    paddingLeft: 35,
-    paddingRight: 35,
+    padding: 5
+  },
+  beerContainer: {
+    border: '1px solid #B6B6B6',
+    borderRadius: 5,
+    padding: 20
   }
 };
 
 const renderBeer = (beer) => (
-  <ListGroupItem
+  <div
     key={beer.id}
-    tag={Link}
-    to={`/beers/${beer.id}`}
+    className="col-xs-12 col-md-6 col-xl-4"
     style={styles.listItem}
   >
-    <div className="row">
-      <div className="col-xs-3">
-        <img src={beer.thumb_image_url} alt={beer.name} height={100} width={100}/>
-      </div>
-      <div className="col-xs-9" style={{ marginLeft: 30 }}>
-        <h3>{beer.name}</h3>
-        { beer.rating ?
-          <StarRating editing={false} value={beer.rating}/> :
-          <p>This beer is not rated yet.</p>}
+    <div style={styles.beerContainer}>
+      <div className="row">
+        <div className="col-xs-3">
+          <img src={beer.thumb_image_url} alt={beer.name} height={100} width={100}/>
+        </div>
+        <div className="col-xs-7 offset-1">
+          <H2><Link to={`/beers/${beer.id}`}>{beer.name}</Link></H2>
+          { beer.rating ?
+            <StarRating editing={false} value={beer.rating}/> :
+            <p>This beer is not rated yet.</p>}
+        </div>
       </div>
     </div>
-  </ListGroupItem>
+  </div>
 );
 
 
@@ -72,26 +76,31 @@ export default class BeersList extends Component {
 
     return (
       <div className="container" style={styles.container}>
-        <H1>Belgian Beers</H1>
-        <FormGroup>
-          <Label for="selectFilter">Show:</Label>
-          <Input
-            type="select"
-            name="selectFilter"
-            id="selectFilter"
-            value={selectFilterValue}
-            onChange={this.handleFilterChange}
-          >
-            <option value={0}>All beers</option>
-            <option value={1}>Only rated beers</option>
-          </Input>
-        </FormGroup>
-        <ListGroup>
+        <div className="row">
+          <div className="col-xs-12">
+            <H1>Belgian Beers</H1>
+            <FormGroup>
+              <Label for="selectFilter">Show:</Label>
+              <Input
+                type="select"
+                name="selectFilter"
+                id="selectFilter"
+                value={selectFilterValue}
+                onChange={this.handleFilterChange}
+              >
+                <option value={0}>All beers</option>
+                <option value={1}>Only rated beers</option>
+              </Input>
+            </FormGroup>
+          </div>
+        </div>
+        <div className="row">
           {beers
             .filter(this.filterBeerIfNecessary)
             .map(renderBeer)}
-        </ListGroup>
-      </div>);
+        </div>
+      </div>
+    );
   }
 }
 

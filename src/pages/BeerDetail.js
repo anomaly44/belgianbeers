@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Card, CardTitle, CardText } from 'reactstrap'
+import { Card, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap'
 import { getBeer } from '../utils/beerDataUtils'
+import { Link } from 'react-router-dom'
 
 // # Components
 import StarRating from '../components/StarRating'
 import H1 from '../components/H1'
+import H2 from '../components/H2'
 
 const styles = {
   container: {
     marginTop: 30,
-    marginBottom: 30,
-  },
-  beerNameHeading: {
-    textAlign: 'center',
-    marginTop: 20,
     marginBottom: 30
   },
   beerImage: {
-    marginBottom: 30
+    marginBottom: 30,
+    maxWidth: 350
   },
 };
 
@@ -44,9 +42,17 @@ export default class BeerDetail extends Component {
     const brewery = beer.brewery;
     return (
       <div className="container" style={styles.container}>
-        <H1>
-          {beer.name}
-        </H1>
+        <div className="row">
+          <div className="col-xs-12" style={{ margin: 'auto' }}>
+            <H1>
+              {beer.name}
+            </H1>
+          </div>
+        </div>
+        <Breadcrumb tag="nav">
+          <BreadcrumbItem tag={Link} to="/">Beers</BreadcrumbItem>
+          <BreadcrumbItem >{beer.name}</BreadcrumbItem>
+        </Breadcrumb>
         <div className="row">
           <div className="col-xs-12 col-md-6" style={{ textAlign: 'center' }}>
             <img
@@ -65,10 +71,10 @@ export default class BeerDetail extends Component {
                 {brewery.city}
               </CardText>
             </Card>
-            <div>
-              <h3 style={{ marginTop: 20 }}>
+            <div style={{ marginTop: 20 }}>
+              <H2>
                 {beer.rating ? 'Change the rating of this beer:' : 'Rate this beer'}
-              </h3>
+              </H2>
               <div style={styles.ratingContainer}>
                 <StarRating
                   value={beer.rating}

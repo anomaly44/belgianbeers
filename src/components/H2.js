@@ -1,11 +1,11 @@
 import React from 'react'
 
 export default (props) => (
-  <h1 style={{
-    fontSize: '2em',
-    marginBottom: 25,
+  <h2 style={{
+    fontSize: '1.5em',
+    marginBottom: 15,
   }}
   >
     {props.children}
-  </h1>
+  </h2>
 );
