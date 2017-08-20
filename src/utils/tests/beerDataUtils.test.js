@@ -1,18 +1,18 @@
-import { expect } from 'chai'
+import { expect } from 'chai';
 import {
   getBeerIndex,
-  getBeer
-} from '../beerDataUtils'
+  getBeer,
+} from '../beerDataUtils';
 
 const dummyBeers = [
   {
     id: 1,
-    name: 'Duvel'
+    name: 'Duvel',
   },
   {
     id: 2,
-    name: 'Karmeliet'
-  }
+    name: 'Karmeliet',
+  },
 ];
 
 describe('beerDataUtils', () => {

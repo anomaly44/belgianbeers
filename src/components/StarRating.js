@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const radioStyle = {
   display: 'none',
   position: 'absolute',
-  marginLeft: -9999
+  marginLeft: -9999,
 };
 
 export default class StarRating extends Component {
-
   handleStarClick = (index) => {
     const { editing, onRatingChange } = this.props;
 
@@ -21,14 +20,14 @@ export default class StarRating extends Component {
 
   renderStars() {
     const { value, editing, large } = this.props;
-    const selectStarStyle = (i) => ({
+    const selectStarStyle = i => ({
       float: 'left',
       cursor: editing ? 'pointer' : 'default',
-      color: value >= i ? '#ffb400' : '#6D6D6D'
+      color: value >= i ? '#ffb400' : '#6D6D6D',
     });
     const nodes = [];
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 5; i += 1) {
       const starInput = (
         <input
           key={`star_${i}`}
@@ -38,6 +37,7 @@ export default class StarRating extends Component {
           checked={value === i}
           readOnly={!editing}
           onChange={() => null}
+          id={`star_${i}`}
         />
       );
       const starLabel = (
@@ -45,10 +45,11 @@ export default class StarRating extends Component {
           key={`label_${i}`}
           style={selectStarStyle(i)}
           onClick={() => this.handleStarClick(i)}
-        ><i style={{fontStyle: 'normal', fontSize: large ? '3em' : '1.5em'}}>&#9733;</i></label>
-      );
+          htmlFor={`star_${i}`}
+        ><i style={{ fontStyle: 'normal', fontSize: large ? '3em' : '1.5em' }}>&#9733;</i></label>
+      ); // eslint-disable-line
       nodes.push(starInput);
-      nodes.push(starLabel)
+      nodes.push(starLabel);
     }
     return nodes;
   }
@@ -58,13 +59,20 @@ export default class StarRating extends Component {
       <div style={{ display: 'inline-block', position: 'relative' }}>
         {this.renderStars()}
       </div>
-    )
-
+    );
   }
 }
+
+StarRating.defaultProps = {
+  value: 0,
+  editing: false,
+  large: false,
+  onRatingChange: null,
+};
 
 StarRating.propTypes = {
   value: PropTypes.number,
   editing: PropTypes.bool,
-  onRatingChange: PropTypes.func
+  large: PropTypes.bool,
+  onRatingChange: PropTypes.func,
 };

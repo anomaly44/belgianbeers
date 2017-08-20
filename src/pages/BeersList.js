@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Input,
   FormGroup,
-  Form
-} from 'reactstrap'
+  Form,
+} from 'reactstrap';
 
 // # Components
-import H1 from '../components/H1'
-import BeersListItem from '../components/BeersListItem'
+import H1 from '../components/H1';
+import BeersListItem from '../components/BeersListItem';
 
 
 const styles = {
@@ -18,20 +18,19 @@ const styles = {
   },
   filterSelect: {
     display: 'inline-block',
-    marginRight: 10 
+    marginRight: 10,
   },
   sortSelect: {
     display: 'inline-block',
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
 };
 
 
 export default class BeersList extends Component {
-
   state = {
     selectFilterValue: 0,
-    selectSortValue: 'alphabet'
+    selectSortValue: 'alphabet',
   };
 
   handleFilterChange = (event) => {
@@ -50,7 +49,6 @@ export default class BeersList extends Component {
     }
 
     return !!beer.rating;
-
   };
 
   sortBeers = (beerA, beerB) => {
@@ -63,7 +61,6 @@ export default class BeersList extends Component {
 
     // when sorting by rating
     return (beerB.rating || 0) - (beerA.rating || 0);
-
   };
 
   render() {
@@ -73,7 +70,7 @@ export default class BeersList extends Component {
     return (
       <div className="container" style={styles.container}>
         <div className="row justify-content-md-center justify-content-xs-center">
-          <div className="col-xs-12" style={{textAlign: 'center'}}>
+          <div className="col-xs-12" style={{ textAlign: 'center' }}>
             <H1>Belgian Beers</H1>
             <Form>
               <FormGroup style={styles.filterSelect}>
@@ -115,5 +112,5 @@ export default class BeersList extends Component {
 }
 
 BeersList.propTypes = {
-  beers: PropTypes.array.isRequired
+  beers: PropTypes.array.isRequired,
 };

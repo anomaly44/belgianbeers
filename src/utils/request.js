@@ -23,8 +23,7 @@ function checkStatus(response) {
     return response;
   }
   return parseJSON(response)
-    .then(parsedResponse => {
-      console.log(parsedResponse);
+    .then((parsedResponse) => {
       const error = new Error(parsedResponse.error);
       error.statusText = response.statusText;
       throw error;

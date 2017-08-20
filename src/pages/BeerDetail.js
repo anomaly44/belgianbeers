@@ -1,31 +1,30 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Card, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap'
-import { getBeer } from '../utils/beerDataUtils'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Card, CardTitle, CardText, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { getBeer } from '../utils/beerDataUtils';
 
 // # Components
-import StarRating from '../components/StarRating'
-import H1 from '../components/H1'
-import H2 from '../components/H2'
+import StarRating from '../components/StarRating';
+import H1 from '../components/H1';
+import H2 from '../components/H2';
 
 const styles = {
   container: {
     marginTop: 30,
-    marginBottom: 30
+    marginBottom: 30,
   },
   beerImage: {
     marginBottom: 30,
-    maxWidth: 350
+    maxWidth: 350,
   },
 };
 
 export default class BeerDetail extends Component {
-
-  getBeerId = () => {
+  getBeerId = () =>
     // grab id param and cast to int
-    return this.props.match && this.props.match.params.id * 1;
-  };
+    this.props.match && this.props.match.params.id * 1
+  ;
 
   getSelectedBeer = () => {
     const { beers } = this.props;
@@ -67,7 +66,7 @@ export default class BeerDetail extends Component {
                 {brewery.name}
               </CardTitle>
               <CardText>
-                {brewery.address} <br/>
+                {brewery.address} <br />
                 {brewery.city}
               </CardText>
             </Card>
@@ -87,11 +86,12 @@ export default class BeerDetail extends Component {
           </div>}
         </div>
 
-      </div>)
+      </div>);
   }
 }
 
 BeerDetail.propTypes = {
   beers: PropTypes.array.isRequired,
-  changeRating: PropTypes.func.isRequired
+  changeRating: PropTypes.func.isRequired,
+  match: PropTypes.object.isRequired,
 };
