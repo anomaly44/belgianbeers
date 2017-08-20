@@ -41,6 +41,10 @@ export default class BeerDetail extends Component {
     const brewery = beer.brewery;
     return (
       <div className="container" style={styles.container}>
+        <Breadcrumb tag="nav">
+          <BreadcrumbItem tag={Link} to="/">Beers</BreadcrumbItem>
+          <BreadcrumbItem >{beer.name}</BreadcrumbItem>
+        </Breadcrumb>
         <div className="row">
           <div className="col-xs-12" style={{ margin: 'auto' }}>
             <H1>
@@ -48,10 +52,6 @@ export default class BeerDetail extends Component {
             </H1>
           </div>
         </div>
-        <Breadcrumb tag="nav">
-          <BreadcrumbItem tag={Link} to="/">Beers</BreadcrumbItem>
-          <BreadcrumbItem >{beer.name}</BreadcrumbItem>
-        </Breadcrumb>
         <div className="row">
           <div className="col-xs-12 col-md-6" style={{ textAlign: 'center' }}>
             <img
