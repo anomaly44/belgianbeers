@@ -18,7 +18,7 @@ const styles = {
   },
 };
 
-export default function BeersListItem ({beer}) {
+const BeersListItem = ({beer}) => {
   return (
     <div
       className="col-xs-12 col-md-6 col-xl-4"
@@ -40,9 +40,10 @@ export default function BeersListItem ({beer}) {
       </div>
     </div>
   );
-}
+};
 
 BeersListItem.propTypes = {
   beer: PropTypes.object.isRequired
 };
 
+export default BeersListItem;

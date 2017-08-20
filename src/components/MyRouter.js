@@ -11,7 +11,7 @@ import BeersList from '../pages/BeersList'
 import NoMatch from '../pages/NoMatch'
 import BeerDetail from '../pages/BeerDetail'
 
-export default function MyRouter (props) {
+const MyRouter = (props) => {
   return (
     <Router>
       <div>
@@ -27,9 +27,11 @@ export default function MyRouter (props) {
       </div>
     </Router>
   );
-}
+};
 
 MyRouter.propTypes = {
   beers: PropTypes.array.isRequired,
   changeRating: PropTypes.func.isRequired,
 };
+
+export default MyRouter;

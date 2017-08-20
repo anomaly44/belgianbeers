@@ -7,7 +7,6 @@ const radioStyle = {
   marginLeft: -9999
 };
 
-
 export default class StarRating extends Component {
 
   handleStarClick = (index) => {
@@ -18,19 +17,17 @@ export default class StarRating extends Component {
     }
 
     onRatingChange(index);
-
   };
 
   renderStars() {
     const { value, editing, large } = this.props;
-
     const selectStarStyle = (i) => ({
       float: 'left',
       cursor: editing ? 'pointer' : 'default',
       color: value >= i ? '#ffb400' : '#6D6D6D'
     });
-
     const nodes = [];
+
     for (let i = 1; i <= 5; i++) {
       const starInput = (
         <input

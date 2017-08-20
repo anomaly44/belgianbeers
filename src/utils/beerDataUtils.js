@@ -7,7 +7,7 @@ function getBeer(beers, id) {
   return beers[getBeerIndex(beers, id)]
 }
 
-module.exports = {
+export {
   getBeerIndex,
   getBeer
 };
