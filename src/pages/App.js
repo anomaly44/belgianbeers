@@ -18,7 +18,7 @@ export default class App extends React.Component {
     };
   }
 
-  async componentDidMount() {
+  async componentWillMount() {
     try {
       this.setState({
         loading: true,
