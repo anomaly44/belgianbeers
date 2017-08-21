@@ -38,55 +38,63 @@ export default class BeerDetail extends Component {
 
   render() {
     const beer = this.getSelectedBeer();
-    const brewery = beer.brewery;
-    return (
-      <div className="container" style={styles.container}>
-        <Breadcrumb tag="nav">
-          <BreadcrumbItem tag={Link} to="/">Beers</BreadcrumbItem>
-          <BreadcrumbItem >{beer.name}</BreadcrumbItem>
-        </Breadcrumb>
-        <div className="row">
-          <div className="col-xs-12" style={{ margin: 'auto' }}>
-            <H1>
-              {beer.name}
-            </H1>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-xs-12 col-md-6" style={{ textAlign: 'center' }}>
-            <img
-              src={beer.image_url}
-              alt={beer.name}
-              style={styles.beerImage}
-            />
-          </div>
-          { brewery && <div className="col-xs-12 col-md-6">
-            <Card style={{ padding: 20 }}>
-              <CardTitle>
-                {brewery.name}
-              </CardTitle>
-              <CardText>
-                {brewery.address} <br />
-                {brewery.city}
-              </CardText>
-            </Card>
-            <div style={{ marginTop: 20 }}>
-              <H2>
-                {beer.rating ? 'Change the rating of this beer:' : 'Rate this beer'}
-              </H2>
-              <div>
-                <StarRating
-                  value={beer.rating}
-                  onRatingChange={this.changeBeerRating}
-                  editing
-                  large
-                />
-              </div>
+    const brewery = beer && beer.brewery;
+    if (beer) {
+      return (
+        <div className="container" style={styles.container}>
+          <Breadcrumb tag="nav">
+            <BreadcrumbItem tag={Link} to="/">Beers</BreadcrumbItem>
+            <BreadcrumbItem >{beer.name}</BreadcrumbItem>
+          </Breadcrumb>
+          <div className="row">
+            <div className="col-xs-12" style={{ margin: 'auto' }}>
+              <H1>
+                {beer.name}
+              </H1>
             </div>
-          </div>}
-        </div>
+          </div>
+          <div className="row">
+            <div className="col-xs-12 col-md-6" style={{ textAlign: 'center' }}>
+              <img
+                src={beer.image_url}
+                alt={beer.name}
+                style={styles.beerImage}
+              />
+            </div>
+            { brewery && <div className="col-xs-12 col-md-6">
+              <Card style={{ padding: 20 }}>
+                <CardTitle>
+                  {brewery.name}
+                </CardTitle>
+                <CardText>
+                  {brewery.address} <br />
+                  {brewery.city}
+                </CardText>
+              </Card>
+              <div style={{ marginTop: 20 }}>
+                <H2>
+                  {beer.rating ? 'Change the rating of this beer:' : 'Rate this beer'}
+                </H2>
+                <div>
+                  <StarRating
+                    value={beer.rating}
+                    onRatingChange={this.changeBeerRating}
+                    editing
+                    large
+                  />
+                </div>
+              </div>
+            </div>}
+          </div>
 
-      </div>);
+        </div>);
+    }
+    // else show error
+    return (<div className="container" style={styles.container}>
+        <h1>We could not load this beer</h1>
+        <p>Please try again later or click <Link to="/">here</Link> to go to our list of beers.</p>
+      </div>
+    )
   }
 }
 
