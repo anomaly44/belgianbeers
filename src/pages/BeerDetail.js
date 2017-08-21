@@ -74,7 +74,7 @@ export default class BeerDetail extends Component {
               <H2>
                 {beer.rating ? 'Change the rating of this beer:' : 'Rate this beer'}
               </H2>
-              <div style={styles.ratingContainer}>
+              <div>
                 <StarRating
                   value={beer.rating}
                   onRatingChange={this.changeBeerRating}
